@@ -1,4 +1,4 @@
-from studentClass import *
+from student_class import *
 
 def show_menu():
     print("What would you like to do today?")
@@ -66,11 +66,11 @@ def run_remove(students):
             print("No student found")
         choice = input("Do you want to remove more students?y(yes)/n(no)\n").lower()
 
-def printList(students):
+def print_list(students):
     for student in students:
         print(students[student].get_all_attributes())
 
-def saveData(students):
+def save_data(students):
     fid = open('data.txt','w')
     for student in students:
         fid.write(students[student].get_all_attributes())
