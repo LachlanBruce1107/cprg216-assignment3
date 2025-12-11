@@ -16,14 +16,41 @@ def add(students,id,first_name,last_name,gpa,semester):
 def remove(students,id):
     students.pop(id)
 
-def edit_name(students,id,new_name):
-    pass
+def edit_student(students,id):
+    first_name = input("First name:\n")
+    last_name = input("Last name:\n")
+    gpa = float(input("GPA:\n"))
+    semester = int(input("Semester:\n"))
+    students[id].set_first_name(first_name)
+    students[id].set_last_name(last_name)
+    students[id].set_gpa(gpa)
+    students[id].set_semster(semester)
 
-def search(students, id):
-    pass
+def search(students, choice):
+    if choice == "1":
+        id = input("Please Enter the id of the student:\n")
+    elif  choice == "2":
+        first_name = input("Please Enter the first name of the student:\n")
+        last_name = input("Please Enter the last name of the student:\n")
+        for student in students:
+            if first_name == students[student].get_first_name() and last_name == students[student].get_last_name():
+                id = student
+                break
+
+    first_name = students[id].get_first_name()
+    last_name = students[id].get_last_name()
+    gpa = str(students[id].get_gpa())
+    semester = str(students[id].get_semester())
+    student_info = (id, first_name, last_name, gpa, semester)
+    return ' '.join(student_info)
 
 def run_search(students):
-    pass
+    choice = input("To search using the Id enter 1. To search using the first name and last name enter 2. Enter -1 to return to the previous menu\n" )
+    if  choice == "-1":
+        return
+    else:
+        student_info = search(students, choice)
+        print("Student found  ", student_info)
 
 def run_edit(students):
     pass
