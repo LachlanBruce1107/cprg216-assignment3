@@ -28,4 +28,3 @@ while choice == 'y' or choice == 'yes':
             save_data(student_list)
     
     choice = input("Would you like to continue(y/yes), or exit the program(n/no)? \n")
-

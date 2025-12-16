@@ -29,31 +29,41 @@ def edit_student(students,id):
 def search(students, choice):
     if choice == "1":
         id = input("Please Enter the id of the student:\n")
+        if id in students:
+            return id
     elif  choice == "2":
         first_name = input("Please Enter the first name of the student:\n")
         last_name = input("Please Enter the last name of the student:\n")
         for student in students:
             if first_name == students[student].get_first_name() and last_name == students[student].get_last_name():
                 id = student
-                break
+                return id
 
-    first_name = students[id].get_first_name()
-    last_name = students[id].get_last_name()
-    gpa = str(students[id].get_gpa())
-    semester = str(students[id].get_semester())
-    student_info = (id, first_name, last_name, gpa, semester)
-    return ' '.join(student_info)
+    return None
 
 def run_search(students):
-    choice = input("To search using the Id enter 1. To search using the first name and last name enter 2. Enter -1 to return to the previous menu\n" )
-    if  choice == "-1":
-        return
-    else:
-        student_info = search(students, choice)
-        print("Student found  ", student_info)
+    while True:
+        choice = input("To search using the Id enter 1. To search using the first name and last name enter 2. Enter -1 to return to the previous menu\n" )
+        if  choice == "-1":
+            return
+        elif choice == "1" or choice == "2":
+            id = search(students, choice)
+            if id != None:
+                print("Student found  ", students[id].get_all_attributes())
+            else:
+                print("Student not found")
 
 def run_edit(students):
-    pass
+    while True:
+        print("Enter the id of the student. Enter -1 to return to the previous menu")
+        id = input("id:\n")
+        if id == "-1":
+            break
+        elif id in students:
+            edit_student(students, id)
+            print("Student's new info is",students[id].get_all_attributes())
+        else:
+            print("No student found")
     
 def same_name(students,first_name,last_name):
     for student in students:
@@ -78,7 +88,7 @@ def run_add(students):
             add(students,id,first_name,last_name,gpa,semester)
             print("Student Enrolled in the system")
             print(id,first_name,last_name,gpa,semester,)
-        choice = input("Do you want to add a new student?y(yes)/n(no)\n").lower()
+        choice = input("Do you want to add more students? y(yes)/n(no)\n").lower()
 
 
 def run_remove(students):
@@ -103,3 +113,4 @@ def save_data(students):
         fid.write(students[student].get_all_attributes())
         fid.write('\n')
     fid.close
+    print("Data saved to local file successfully!")
